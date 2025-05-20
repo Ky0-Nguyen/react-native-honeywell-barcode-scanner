@@ -1,6 +1,6 @@
 # React Native Honeywell Barcode Scanner
 
-A React Native library for integrating Honeywell barcode scanners into your React Native applications. This library provides a simple and efficient way to interact with Honeywell barcode scanning devices on both Android and iOS platforms.
+A React Native library for integrating Honeywell barcode scanners into your React Native applications. This library provides a simple and efficient way to interact with Honeywell barcode scanning devices on Android platform.
 
 ## Features
 
@@ -8,6 +8,12 @@ A React Native library for integrating Honeywell barcode scanners into your Reac
 - Simple and intuitive API
 - TypeScript support
 - Compatible with React Native 0.79.2 and above
+
+## Requirements
+
+- Android device with Honeywell barcode scanner hardware
+- Does not work on Android emulators
+- Does not work on iOS devices
 
 ## Installation
 
@@ -17,45 +23,54 @@ npm install @angelcat/react-native-honeywell-barcode-scanner
 yarn add @angelcat/react-native-honeywell-barcode-scanner
 ```
 
-### iOS
-
-For iOS, you need to install the pods:
-
-```sh
-cd ios && pod install
-```
-
 ## Usage
 
 ```js
-import { HoneywellBarcodeScanner } from '@angelcat/react-native-honeywell-barcode-scanner';
+import Scanner from '@angelcat/react-native-honeywell-barcode-scanner';
 
 // Initialize the scanner
-const scanner = new HoneywellBarcodeScanner();
+Scanner.initializeScanner()
+  .then(() => {
+    console.log('Scanner initialized successfully');
+  })
+  .catch((error) => {
+    console.error('Failed to initialize scanner:', error);
+  });
 
-// Start scanning
-scanner.startScanning({
-  onScan: (barcode) => {
-    console.log('Scanned barcode:', barcode);
-  },
-  onError: (error) => {
-    console.error('Scanning error:', error);
-  }
+// Setup barcode read listener
+const unsub = Scanner.onBarcodeRead((e) => {
+  console.log('Scanned barcode:', e.data);
 });
 
+// Setup error listener
+const errorUnsub = Scanner.onBarcodeError((e) => {
+  console.error('Scanning error:', e.error);
+});
+
+// Start scanning
+Scanner.startScan();
+
 // Stop scanning when done
-scanner.stopScanning();
+Scanner.stopScan();
+
+// Clean up listeners
+unsub();
+errorUnsub();
 ```
 
 ## API Reference
 
 ### Methods
 
-- `startScanning(options)`: Start the barcode scanner
-  - `options.onScan`: Callback function when a barcode is scanned
-  - `options.onError`: Callback function when an error occurs
-
-- `stopScanning()`: Stop the barcode scanner
+- `initializeScanner()`: Initialize the barcode scanner
+- `startScan()`: Start the barcode scanner
+- `stopScan()`: Stop the barcode scanner
+- `onBarcodeRead(callback)`: Set up listener for barcode scans
+  - `callback(event)`: Called when a barcode is scanned
+    - `event.data`: The scanned barcode data
+- `onBarcodeError(callback)`: Set up listener for scanner errors
+  - `callback(event)`: Called when an error occurs
+    - `event.error`: The error message
 
 ## Contributing
 

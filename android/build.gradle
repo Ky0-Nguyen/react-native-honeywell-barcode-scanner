@@ -6,6 +6,9 @@ buildscript {
   repositories {
     google()
     mavenCentral()
+    flatDir {
+      dirs 'libs' // Thư mục cùng cấp với build.gradle
+    }
   }
 
   dependencies {
@@ -67,6 +70,9 @@ android {
 repositories {
   mavenCentral()
   google()
+  flatDir {
+    dirs 'libs' // Thư mục cùng cấp với build.gradle
+  }
 }
 
 def kotlin_version = getExtOrDefault("kotlinVersion")
@@ -74,6 +80,7 @@ def kotlin_version = getExtOrDefault("kotlinVersion")
 dependencies {
   implementation "com.facebook.react:react-android"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation(name: 'BleDexAdapterSdk-v1.20.02.00', ext: 'aar')
 }
 
 react {

@@ -1,23 +1,56 @@
-package com.honeywellbarcodescanner
+package com.honeywellscanner
 
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.module.annotations.ReactModule
+import android.util.Log
+import com.facebook.react.bridge.*
+import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.honeywell.aidc.*
 
-@ReactModule(name = HoneywellBarcodeScannerModule.NAME)
-class HoneywellBarcodeScannerModule(reactContext: ReactApplicationContext) :
-  NativeHoneywellBarcodeScannerSpec(reactContext) {
+class HoneywellScannerModule(private val reactContext: ReactApplicationContext) :
+    ReactContextBaseJavaModule(reactContext) {
 
-  override fun getName(): String {
-    return NAME
-  }
+    private var aidcManager: AidcManager? = null
+    private var barcodeReader: BarcodeReader? = null
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
-  override fun multiply(a: Double, b: Double): Double {
-    return a * b
-  }
+    override fun getName(): String {
+        return "HoneywellScanner"
+    }
 
-  companion object {
-    const val NAME = "HoneywellBarcodeScanner"
-  }
+    init {
+        AidcManager.create(reactContext) { manager ->
+            aidcManager = manager
+            barcodeReader = manager.createBarcodeReader()
+            try {
+                barcodeReader?.claim()
+                barcodeReader?.addBarcodeListener { event ->
+                    val params = Arguments.createMap()
+                    params.putString("data", event.barcodeData)
+                    reactContext
+                        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                        .emit("onBarcodeRead", params)
+                }
+            } catch (e: Exception) {
+                Log.e("HoneywellScanner", "Error claiming reader: ${e.message}")
+            }
+        }
+    }
+
+    @ReactMethod
+    fun startScan(promise: Promise) {
+        try {
+            barcodeReader?.softwareTrigger(true)
+            promise.resolve("Started")
+        } catch (e: Exception) {
+            promise.reject("StartError", e)
+        }
+    }
+
+    @ReactMethod
+    fun stopScan(promise: Promise) {
+        try {
+            barcodeReader?.softwareTrigger(false)
+            promise.resolve("Stopped")
+        } catch (e: Exception) {
+            promise.reject("StopError", e)
+        }
+    }
 }

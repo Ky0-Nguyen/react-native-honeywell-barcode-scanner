@@ -1,5 +1,13 @@
-import HoneywellBarcodeScanner from './NativeHoneywellBarcodeScanner';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 
-export function multiply(a: number, b: number): number {
-  return HoneywellBarcodeScanner.multiply(a, b);
-}
+const { HoneywellScanner } = NativeModules;
+const emitter = new NativeEventEmitter(HoneywellScanner);
+
+export default {
+  startScan: () => HoneywellScanner.startScan(),
+  stopScan: () => HoneywellScanner.stopScan(),
+  onBarcodeRead: (callback: (event: { data: string }) => void) => {
+    const sub = emitter.addListener('onBarcodeRead', callback);
+    return () => sub.remove();
+  },
+};

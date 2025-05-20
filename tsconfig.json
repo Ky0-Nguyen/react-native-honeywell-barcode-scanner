@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-honeywell-barcode-scanner": ["./src/index"]
+      "@angelcat/react-native-honeywell-barcode-scanner": ["./lib/typescript/src"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@angelcat/react-native-honeywell-barcode-scanner": ["../src"]
+      "@angelcat/react-native-honeywell-barcode-scanner": ["../lib/typescript/src"]
     }
   },
   "include": ["src/**/*"],

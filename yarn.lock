@@ -15,7 +15,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angelcat/react-native-honeywell-barcode-scanner@workspace:.":
+"@angelcat/react-native-honeywell-barcode-scanner@^0.0.2, @angelcat/react-native-honeywell-barcode-scanner@workspace:.":
   version: 0.0.0-use.local
   resolution: "@angelcat/react-native-honeywell-barcode-scanner@workspace:."
   dependencies:
@@ -10573,6 +10573,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-native-honeywell-barcode-scanner-example@workspace:example"
   dependencies:
+    "@angelcat/react-native-honeywell-barcode-scanner": ^0.0.2
     "@babel/core": ^7.25.2
     "@babel/preset-env": ^7.25.3
     "@babel/runtime": ^7.25.0

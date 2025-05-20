@@ -38,7 +38,7 @@ export default function App() {
   const handleStartScan = async () => {
     try {
       await Scanner.startScan();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Start scan error:', error);
       Alert.alert('Error', 'Failed to start scan: ' + error.message);
     }
@@ -47,7 +47,7 @@ export default function App() {
   const handleStopScan = async () => {
     try {
       await Scanner.stopScan();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Stop scan error:', error);
       Alert.alert('Error', 'Failed to stop scan: ' + error.message);
     }

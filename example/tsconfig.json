@@ -1,0 +1,9 @@
+{
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@angelcat/react-native-honeywell-barcode-scanner": ["../lib/typescript/src"]
+    }
+  }
+}

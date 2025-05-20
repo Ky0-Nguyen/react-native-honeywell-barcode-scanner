@@ -1,6 +1,6 @@
 {
   "name": "@angelcat/react-native-honeywell-barcode-scanner",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React Native Honeywell Barcode Scanner",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",

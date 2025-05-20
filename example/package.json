@@ -10,7 +10,7 @@
     "build:ios": "react-native build-ios --mode Debug"
   },
   "dependencies": {
-    "@angelcat/react-native-honeywell-barcode-scanner": "^0.0.5",
+    "@angelcat/react-native-honeywell-barcode-scanner": "workspace:^",
     "react": "19.0.0",
     "react-native": "0.79.2"
   },

@@ -10588,6 +10588,7 @@ __metadata:
     react-native: 0.79.2
     react-native-builder-bob: ^0.40.11
     react-native-monorepo-config: ^0.1.9
+    typescript: ^5.8.3
   languageName: unknown
   linkType: soft
 
@@ -12194,7 +12195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.5.5":
+"typescript@npm:^5.5.5, typescript@npm:^5.8.3":
   version: 5.8.3
   resolution: "typescript@npm:5.8.3"
   bin:
@@ -12204,7 +12205,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^5.5.5#~builtin<compat/typescript>":
+"typescript@patch:typescript@^5.5.5#~builtin<compat/typescript>, typescript@patch:typescript@^5.8.3#~builtin<compat/typescript>":
   version: 5.8.3
   resolution: "typescript@patch:typescript@npm%3A5.8.3#~builtin<compat/typescript>::version=5.8.3&hash=14eedb"
   bin:

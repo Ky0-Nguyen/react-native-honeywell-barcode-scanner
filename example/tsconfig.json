@@ -3,7 +3,9 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@angelcat/react-native-honeywell-barcode-scanner": ["../lib/typescript/src"]
+      "@angelcat/react-native-honeywell-barcode-scanner": ["../src"]
     }
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "babel.config.js", "metro.config.js"]
 }
